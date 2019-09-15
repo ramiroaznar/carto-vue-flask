@@ -3,7 +3,9 @@ Vue.config.ignoredElements = [/as-\w+/];
 const vm = new Vue({
     el: "#app",
     data: {
-        geometryType: 'cities'
+        geometryType: 'cities',
+        map: false,
+        features: {}
     },
     computed: {
         query: function() {
@@ -18,13 +20,42 @@ const vm = new Vue({
       },
     methods: {
         loadMap: function() {
-          this.$http.post('/query', {query: this.query})
-            .then(response => {
-              console.log(response);
-            })
-            .catch( error => {
-              console.log(error);
-            });
+          this.map = true;
+
+          this.$http.get('/data', {params:  {query: this.query}} ).then(response => {
+            this.features = JSON.parse(response.bodyText);
+            console.log(this.features);
+          }, response => {
+            console.log('an error ocurred')
+          })
         }
+    },
+    watch: {
+    
+      features: function() {
+
+        const map = new mapboxgl.Map({
+          container: 'map',
+          style: carto.basemaps.voyager,
+          center: [10.151367,51.172455],
+          zoom: 2,
+          scrollZoom: false
+          });
+
+        const nav = new mapboxgl.NavigationControl({ showCompass: false });
+        map.addControl(nav, 'top-left');
+
+        carto.setDefaultAuth({
+            username: 'cartovl',
+            apiKey: 'default_public'
+        });
+
+        console.log(this.features);
+        const source = new carto.source.GeoJSON(this.features);
+        const viz = new carto.Viz();
+        const layer = new carto.Layer('layer', source, viz);
+        layer.addTo(map, 'watername_ocean');
     }
+
+  }
 })

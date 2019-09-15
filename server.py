@@ -11,25 +11,17 @@ def home():
     
     return render_template('index.html')
 
-@app.route('/query', methods=['POST'])
-def query():
+@app.route('/data', methods=['GET'])
+def data():
 
-    data = request.get_json()
-    query = data['query']
-
-    return redirect(url_for('map', query=query))
-
-@app.route('/map', methods=['GET'])
-def map():
-
-    query = request.args['query']
+    query = request.args.get('query')
     url = 'https://ramiroaznar.carto.com/api/v2/sql?q={}&format=geojson'.format(query)
 
     session = requests.Session()
     r = session.get(url)
     features = r.json()
 
-    return render_template('map.html', features=features)
+    return features
 
 if __name__ == '__main__':
     app.run(debug=True)
