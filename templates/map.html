@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<main class="as-main">
+    <div class="as-map-area">
+        <div id="map"></div>
+    </div>
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="static/vue-config.js"></script>
+<script>
+    const features = JSON.parse('{{ features | tojson }}');
+</script>
+<script src="static/main.js"></script>
+
+{% endblock %}

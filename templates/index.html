@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<main class="as-main">
+    <div class="as-modal">
+        <div class="as-modal__content">
+        <h1 class="as-title">What do you want to visualize?</h1>
+        <ul>
+            <li class="as-radio">
+            <input class="as-radio__input" type="radio" name="geometry" id="cities" value="cities" v-model="geometryType"/>
+            <label class="as-caption" for="cities">Cities</label>
+            </li>
+            <li class="as-radio">
+            <input class="as-radio__input" type="radio" name="geometry" id="countries" value="countries" v-model="geometryType"/>
+            <label class="as-caption" for="countries">Countries</label>
+            </li>
+        </ul>
+        <br>
+        <button class="as-btn as-btn--primary" @click="loadMap">Visualize!</button>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="static/vue-config.js"></script>
+
+{% endblock %}

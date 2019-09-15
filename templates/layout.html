@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Airship + CARTO VL</title>
+
+  <!-- Airship CSS-->
+  <link rel="stylesheet" href="https://libs.cartocdn.com/airship-style/v1.0.3/airship.css">
+  <link rel="stylesheet" href="https://libs.cartocdn.com/airship-icons/v1.0.3/icons.css">
+
+  <!-- Mapbox CSS -->
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css" rel="stylesheet" />
+  <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet">
+
+</head>
+
+<body class="as-app-body">
+
+  <div id="app" class="as-app">
+    <as-responsive-content>
+        {% block content %}
+        {% endblock %}
+    </as-responsive-content>
+  </div>
+  
+  <!-- External JS: Airship, CARTO VL, Mapbox JS, Vue JS, Axios -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
+  <script src="https://libs.cartocdn.com/airship-components/v1.0.3/airship.js"></script>
+  <script src="https://libs.cartocdn.com/carto-vl/v1.1.1/carto-vl.js"></script>
+  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+  
+  {% block scripts %}
+  {% endblock %}
+
+</body>
+
+</html>
